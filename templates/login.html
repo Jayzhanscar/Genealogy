@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    input{
+        border:1px solid grey;
+    }
+    .l1{
+        width: 50%;height: 400px;margin-left: 25%;border: 1px solid goldenrod;margin-top: 100px;text-align: center;
+    }
+    .l2{
+        display: flex;text-align: center;border: 1px solid firebrick;width: 50%;margin-left: 25%;margin-top: 50px;font-size: 20px;
+    }
+    .l3{
+        margin-top: 40px;width: 50%;margin-left: 25%;height: 200px;border: 1px solid peru;display: flex;flex-direction: column;display: none
+    }
+    .l4{
+        margin-top:30px;width: 60%;margin-left: 20%;height: 30px;background-color: #fcfcfc;outline:none;
+    }
+    .l5{
+        margin-top:30px;width: 60%;margin-left: 20%;height: 30px;background-color: #fcfcfc;outline:none;
+    }
+    .l6{
+        width: 30%;margin-left: 35%;margin-top: 30px;height: 30px;
+    }
+    .l7{
+        margin-top: 40px;width: 50%;margin-left: 25%;height: 200px;border: 1px solid peru;display: flex;flex-direction: column;display:none
+    }
+    .l8{
+        margin-top:30px;width: 60%;margin-left: 20%;height: 30px;background-color: #fcfcfc;outline:none;
+    }
+    .l9{
+        margin-top:30px;width: 60%;margin-left: 20%;height: 30px;background-color: #fcfcfc;outline:none;
+    }
+    .ll{
+        width: 30%;margin-left: 35%;margin-top: 30px;height: 30px;
+    }
+</style>
+<body>
+  <div class="l1">
+      <div class="l2">
+          <div style="margin-left: 30%" onclick="login()">登陆</div>
+          <div style="margin-left: 15%" onclick="register()">注册</div>
+      </div>
+      <div id="login" class="l3">
+          <input id = "uname"placeholder="用户名" class="l4"/>
+          <input id="upass" placeholder="密码" type="password" class="l5"/>
+          <button class="l6" onclick="dl()">登陆</button>
+
+      </div>
+      <div id ="register" class="l7">
+          <input id="lname" placeholder="用户名"  class="l8"/>
+          <input id="lpass" placeholder="密码" type="password" class="l9"/>
+          <button  class="ll" onclick="rg()">注册</button>
+      </div>
+  </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function login() {
+        $('#login').css('display','block');
+        $('#register').css('display','none')
+    }
+    function register() {
+        $('#login').css('display','none');
+        $('#register').css('display','block')
+    }
+    function rg() {
+        $.ajax({
+            type:"POST",
+            data:{
+                name:$('#lname').val(),
+                pwd:$('#lpass').val()
+            },
+            url:'/home/register',
+            success:function (res) {
+                if(res == 'ok'){
+                    alert('注册成功')
+                }
+                if (res == 'double'){
+                    alert('用户名已存在')
+                }
+                else{
+                    alert('注册失败，请重新注册')
+                }
+            }
+
+        })
+    }
+    function dl() {
+        $.ajax({
+            type:"POST",
+            data:{
+                name:$('#uname').val(),
+                pwd:$('#upass').val()
+            },
+            url:'/home/relogin',
+            success:function (res) {
+                if(res == 'ok'){
+                    alert('登陆成功');
+                    window.location.href = '/home/user'
+                }
+                else{
+                    alert('登陆失败')
+                }
+            }
+        })
+    }
+</script>
+</html>

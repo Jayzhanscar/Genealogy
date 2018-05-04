@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input{
+            width: 70%;
+            height: 20px;
+            outline: none;
+            margin-top: 5px;
+            border: 0;
+            border-bottom: 1px solid grey;
+            margin-left: 10px;
+         }
+        .a{height: 40px;margin-top: 30px; width: 40%;margin-left: 30%;line-height: 40px;}
+        .b{margin-left: 5px}
+        .c{margin: 0 auto;text-align: center;margin-top: 50px;width: 50%;height: 600px;margin-left: 25%;box-shadow: #666 0px 0px 10px; border:1px solid white}
+        .d{position: absolute;margin-left: 70px;border: 1px solid grey;width: 5%; }
+        .d:active{background-color: #737373;color:white}
+    </style>
+</head>
+<body>
+<div  class="c">
+    <div  class="d" style=" margin-top:  50px"   onclick="tianjia()">添加  </div>
+    <div  class="d" style=" margin-top: 100px"   onclick="xiugai()"> 修改  </div>
+    <div  class="d" style=" margin-top: 150px"   onclick="sousuo()"> 搜索  </div>
+    <div  class="d" style=" margin-top: 200px"   onclick="jiaxun()"> 家训  </div>
+    <div  class="d" style=" margin-top: 250px"   onclick="xu()">      序   </div>
+    <div  class="d" style=" margin-top: 300px"   onclick="shengzhi()"> 圣旨</div>
+    <div id = 'add' style="display: block" >
+         <div style="display: flex" class="a"><div>姓名:</div><input id="uname" placeholder="姓名"></div>
+                 <div style="display: flex" class="a">
+                <div>世代:</div>
+                 <div class="b">第</div>
+                 <div class="b">
+                     <select id ="us1">
+                         <option value ="壹">壹</option>
+                         <option value ="贰">贰</option>
+                         <option value="叁">叁</option>
+                         <option value="肆">肆</option>
+                         <option value="伍">伍</option>
+                         <option value="陆">陆</option>
+                         <option value="柒">柒</option>
+                         <option value="捌">捌</option>
+                         <option value="玖">玖</option>
+                         <option value="拾">拾</option>
+                         <option value="拾壹">拾壹</option>
+                         <option value="拾贰">拾贰</option>
+                         <option value="拾叁">拾叁</option>
+                         <option value="拾肆">拾肆</option>
+                         <option value="拾伍">拾伍</option>
+                         <option value="拾陆">拾陆</option>
+                         <option value="拾柒">拾柒</option>
+                         <option value="拾捌">拾捌</option>
+                         <option value="拾玖">拾玖</option>
+                         <option value="贰拾">贰拾</option>
+                         <option value=贰拾壹>贰拾壹</option>
+                         <option value="贰拾贰">贰拾贰</option>
+                         <option value="贰拾叁">贰拾叁</option>
+                         <option value="贰拾肆">贰拾肆</option>
+                         <option value="贰拾伍">贰拾伍</option>
+                     </select>
+                </div>
+                 <div class="b" >世</div>
+            </div>
+             <div style="display: flex"  class="a">
+                <div>行数:</div>
+                 <div class="b">第</div>
+                 <div class="b" >
+                     <select id="us2">
+                         <option value ="壹">壹</option>
+                         <option value ="贰">贰</option>
+                         <option value="叁">叁</option>
+                         <option value="肆">肆</option>
+                         <option value="伍">伍</option>
+                         <option value="陆">陆</option>
+                         <option value="柒">柒</option>
+                         <option value="捌">捌</option>
+                         <option value="玖">玖</option>
+                         <option value="拾">拾</option>
+                         <option value="拾壹">拾壹</option>
+                         <option value="拾贰">拾贰</option>
+                         <option value="拾叁">拾叁</option>
+                         <option value="拾肆">拾肆</option>
+                         <option value="拾伍">拾伍</option>
+                         <option value="拾陆">拾陆</option>
+                         <option value="拾柒">拾柒</option>
+                         <option value="拾捌">拾捌</option>
+                         <option value="拾玖">拾玖</option>
+                         <option value="贰拾">贰拾</option>
+                         <option value=贰拾壹>贰拾壹</option>
+                         <option value="贰拾贰">贰拾贰</option>
+                         <option value="贰拾叁">贰拾叁</option>
+                         <option value="贰拾肆">贰拾肆</option>
+                         <option value="贰拾伍">贰拾伍</option>
+                     </select>
+                </div>
+                 <div class="b" >行</div>
+            </div>
+             <div style="display: flex" class="a">
+                <div>性别:</div>
+                 <div class="b">
+                     <select id="us3">
+                         <option value ="男">男</option>
+                         <option value ="女">女</option>
+                     </select>
+                </div>
+            </div>
+            <div  style="display: flex" class="a"  ><div>父id：</div><input id="ufather" placeholder="父标签(唯一)" ></div>
+            <div style="display: flex;height: 100px;" class="a" ><textarea id = "ugeren" style="width: 100%;height: 100px;" placeholder="个人介绍"></textarea></div>
+            <div style="display: flex; " class="a"  ><button style=" width: 50%;margin-left: 25%" onclick="submit()">提交</button></div>
+     </div>
+
+
+
+    <div id = 'update' style="display: none">
+        <div style="display: flex" class="a"><div>姓名:</div><input id="uname" placeholder="姓名"></div>
+                   <div style="display: flex" class="a">
+                <div>世代:</div>
+                 <div class="b">第</div>
+                 <div class="b">
+                     <select id="ls1">
+                         <option value ="壹">壹</option>
+                         <option value ="贰">贰</option>
+                         <option value="叁">叁</option>
+                         <option value="肆">肆</option>
+                         <option value="伍">伍</option>
+                         <option value="陆">陆</option>
+                         <option value="柒">柒</option>
+                         <option value="捌">捌</option>
+                         <option value="玖">玖</option>
+                         <option value="拾">拾</option>
+                         <option value="拾壹">拾壹</option>
+                         <option value="拾贰">拾贰</option>
+                         <option value="拾叁">拾叁</option>
+                         <option value="拾肆">拾肆</option>
+                         <option value="拾伍">拾伍</option>
+                         <option value="拾陆">拾陆</option>
+                         <option value="拾柒">拾柒</option>
+                         <option value="拾捌">拾捌</option>
+                         <option value="拾玖">拾玖</option>
+                         <option value="贰拾">贰拾</option>
+                         <option value=贰拾壹>贰拾壹</option>
+                         <option value="贰拾贰">贰拾贰</option>
+                         <option value="贰拾叁">贰拾叁</option>
+                         <option value="贰拾肆">贰拾肆</option>
+                         <option value="贰拾伍">贰拾伍</option>
+                     </select>
+                </div>
+                 <div class="b" >世</div>
+            </div>
+
+             <div style="display: flex"  class="a">
+                <div>行数:</div>
+                 <div class="b">第</div>
+                 <div class="b" >
+                     <select id="ls2">
+                         <option value ="壹">壹</option>
+                         <option value ="贰">贰</option>
+                         <option value="叁">叁</option>
+                         <option value="肆">肆</option>
+                         <option value="伍">伍</option>
+                         <option value="陆">陆</option>
+                         <option value="柒">柒</option>
+                         <option value="捌">捌</option>
+                         <option value="玖">玖</option>
+                         <option value="拾">拾</option>
+                         <option value="拾壹">拾壹</option>
+                         <option value="拾贰">拾贰</option>
+                         <option value="拾叁">拾叁</option>
+                         <option value="拾肆">拾肆</option>
+                         <option value="拾伍">拾伍</option>
+                         <option value="拾陆">拾陆</option>
+                         <option value="拾柒">拾柒</option>
+                         <option value="拾捌">拾捌</option>
+                         <option value="拾玖">拾玖</option>
+                         <option value="贰拾">贰拾</option>
+                         <option value=贰拾壹>贰拾壹</option>
+                         <option value="贰拾贰">贰拾贰</option>
+                         <option value="贰拾叁">贰拾叁</option>
+                         <option value="贰拾肆">贰拾肆</option>
+                         <option value="贰拾伍">贰拾伍</option>
+                     </select>
+                </div>
+                 <div class="b" >行</div>
+            </div>
+
+             <div style="display: flex" class="a">
+                <div>性别:</div>
+                 <div class="b">
+                     <select>
+                         <option value ="男">男</option>
+                         <option value ="女">女</option>
+                     </select>
+                </div>
+            </div>
+
+            <div  style="display: flex" class="a"  ><div>父id：</div><input id="father" placeholder="父亲标签" ></div>
+            <div style="display: flex;height: 100px;" class="a" ><textarea style="width: 100%;height: 100px;" placeholder="个人介绍"></textarea></div>
+            <div style="display: flex; " class="a"  ><button style=" width: 50%;margin-left: 25%">修改</button></div>
+    </div>
+
+
+    <div id="jiaxun" style="margin-top: 70px;border:1px solid firebrick;width: 50%;margin-left: 35%" >
+             <h3>家训数据录入</h3>
+             <div></div>
+    </div>
+
+
+    <div id="search" style="width: 50%;margin-left: 35%;margin-top: 100px;line-height: 40px;display: none">
+        <div style="display: flex">
+            <div>名字:</div>
+            <input placeholder="姓名"/>
+        </div>
+
+        <div style="display: flex">
+            <div>父名:</div>
+            <input placeholder="父名"/>
+        </div>
+        <button onclick="search()">开始搜索</button>
+
+
+        <div style="margin-top: 100px;margin-left: -100%">
+            <div>搜寻结果</div>
+            <div  id="result" style="width: 37%;height: 130px;border: 1px solid gray;margin-left: 55%"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    function tianjia() {
+        $('#add').css('display','block');
+        $('#update').css('display','none');
+        $('#search').css('display','none');
+        $('#jaixun').css('display','none')
+
+    }
+    function xiugai() {
+        $('#add').css('display','none');
+        $('#update').css('display','block');
+        $('#search').css('display','none');
+        $('#jaixun').css('display','none')
+
+    }
+    function sousuo() {
+        $('#add').css('display','none');
+        $('#update').css('display','none');
+        $('#search').css('display','block');
+        $('#jaixun').css('display','none')
+    }
+    function submit() {
+        var name = $('#uname').val();
+        var shu = $('#us1').val();
+        var hang = $('#us2').val();
+        var sex = $('#us3').val();
+        var ufather = $("#ufather").val();
+        var content = $('#ugeren').val();
+        if( name==null){
+            alert('请输入姓名')
+        }
+        if(shu == null){
+            alert('请选择世代')
+        }
+        if( hang == null){
+            alert('请选择行')
+        }
+
+        if( content == null){
+            alert( "请填写内容")
+        }
+        if(  ufather == null){
+            alert( "请填写父标签")
+        }
+           else{
+            $.ajax({
+              type:'POST',
+              data:{
+                  name:name,
+                  shu:shu,
+                  hang:hang,
+                  sex:sex,
+                  father:ufather,
+                  content:content
+              },
+              url:"/home/submit",
+              success:function (res) {
+                  if(res == "ok"){
+                      alert('保存成功')
+                  }
+                  else{
+                      alert("保存失败，请重新输入")
+                  }
+
+              }
+
+          })
+        }
+        
+    }
+    function jiaxun() {
+         $('#add').css('display','none');
+        $('#update').css('display','none');
+        $('#search').css('display','none');
+        $('#jaixun').css('display','block')
+    }
+    function shengzhi() {
+        
+    }
+    function xu() {
+        
+    }
+    function search() {
+        $.ajax({
+            url:'/home/search',
+            data:{
+                father: '栈是发',
+                son:'詹灵杰'
+            },
+            type:'POST',
+            success:function (res) {
+                if(res){
+                    for(var i =0 ;i <res.length; i++){
+                        var oDiv = '<div>'+ res[i].name+'：'+res[i].detail+'</div>';
+                        $('#result').append(oDiv);
+                    }
+                }
+
+            }
+        })
+    }
+</script>
+</html>

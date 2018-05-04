@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>毕业设计2</title>
+<meta name="viewport" content="width = 1050, user-scalable = no" />
+  <style>
+       @font-face
+        {
+            font-family: myFirstFont;
+             src: url(/static/font/qf.ttf);
+        }
+        div
+        {
+         font-family:myFirstFont;
+        }
+        *{padding:0; margin:0;}
+        ul{margin-top:20px;}
+        li{width:200px; height:0px; border-right:2px solid #f00; list-style: none}
+        li h3{line-height:30px; font-size:16px;}
+        .tb-rl{-webkit-writing-mode:vertical-rl;writing-mode:tb-rl;writing-mode:vertical-rl;}
+        .bt{font-size: 30px;float: left;margin-top: 90px;width: 30px;position: absolute;right: 5%}
+      .bg{background-image: url("/static/images/WechatIMG21883.jpeg")}
+      .main-nav{float: left;width: 400px;}
+      .z1{width: 100%; margin-top: 50px;height: 495px}
+      .z2{ height: 495px;width: 84%;}
+      .z3{border:1px solid salmon;height: 50px;width: 100%;display: flex;}
+      .z4{height: 25px;width: 7%;border:1px solid seagreen;margin-top: 10px;margin-left: 20%}
+      .z5{border:1px solid chocolate;height: 430px;width: 100%;margin-top: 2px;display:flex; }
+      .y1{width: 100%; margin-top: 50px;height: 495px}
+      .z6{width: 33%;height: 430px; }
+      .y2{ height: 495px;width: 84%;}
+      .y3{border:1px solid salmon;height: 50px;width: 100%;display: flex;}
+      .y4{height: 25px;width: 7%;border:1px solid seagreen;margin-top: 10px;margin-left: 20%}
+      .y5{border:1px solid chocolate;height: 430px;width: 100%;margin-top: 2px;display:flex;  }
+      .y6{width: 33%;height: 430px;border: 1px solid cornflowerblue}
+      .one {
+        margin: 0 auto;
+        height: 140px;
+        writing-mode: vertical-rl;/*从左向右 从右向左是 writing-mode: vertical-rl; 从左到右 lr*/
+          writing-mode: tb-rl;/*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/
+     }
+    </style>
+<script type="text/javascript" src="/static/js/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="/static/js/modernizr.2.5.3.min.js"></script>
+</head>
+<body>
+
+<div  onclick="hid()" id="look" class="one" style="width: 140px;height:500px;border:1px solid gray;margin-top: 110px;margin-left: 5%;display: none;overflow: auto"></div>
+<div class="flipbook-viewport">
+	<div class="container">
+
+		<div class="flipbook" id = 'home'>
+           <div><img width="460" height="600" src = "/static/images/home.jpeg"/></div>
+
+    {% for i in pp %}
+        {% verbatim %}
+            <!-------------左页---------->
+                    <div style="background-image: url(/static/images/11.jpg)">
+                         <div class="z1" style="display: flex">
+                             <div style="width: 15%;height: 490px; "><div class="one" style="font-size: 30px;margin-top: 40px;height: 430px;">绍兴府吴世家谱第叁拾肆世</div></div>
+                             <div class="z2" style="display: flex" >
+                                 <div style="width: 33%; height: 490px;" v-for="i in list">
+                                     <div style="height: 50px;width: 100%; "> <div style="margin-left: 70%;font-size: 25px;margin-top: 10px;">{{i.father_id}}</div></div>
+                                     <div style="display: flex;width: 99%; height: 430px;">
+                                         <div style=" width: 80%;height: 430px;">
+                                              <div style="width: 100%;height:40px; ">
+                                                  <div style="text-align: center;font-size: 20px;margin-top: 10px;">{{ i.name }}</div>
+                                              </div>
+                                              <div  :id="i.father_id" @click="look(i.father_id)" style="width: 104%;height: 390px; overflow: hidden;margin-left: 17px;" class="one">{{ i.content  }}</div>
+                                         </div>
+                                         <div style=" margin-left: 16px">
+                                             <div class="one" style="margin-top: 40px;">第{{ i.generation }}世</div>
+                                             <div class="one" style="margin-top: 40px;">第{{ i.line }}行</div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+                <!---------右页------->
+                    <div style="background-image: url(/static/images/222.jpg)">
+                        <div class="y1" style="display: flex">
+                              <div class="y2" style="display: flex">
+                                  <div style="width: 33%; height: 490px;" v-for="j in list1">
+                                      <div style="height: 50px;width: 100%; "> <div style="margin-left: 70%;font-size: 25px;margin-top: 10px;">{{j.father_id}}</div></div>
+                                     <div style="display: flex;width: 99%; height: 430px;">
+                                         <div style=" width: 80%;height: 430px;">
+                                              <div style="width: 100%;height:40px; ">
+                                                  <div style="text-align: center;font-size: 20px;margin-top: 10px;">{{ j.name }}</div>
+                                              </div>
+                                              <div  :id="j.father_id" @click="look(j.father_id)"   style="width: 100%;height: 390px; overflow: hidden;margin-left: 1px;" class="one">{{ j.content  }}</div>
+                                         </div>
+                                         <div style="margin-left: 15px ">
+                                             <div class="one" style="margin-top: 40px;">第{{ j.generation }}世</div>
+                                             <div class="one" style="margin-top: 40px;">第{{ j.line }}行</div>
+                                         </div>
+
+                                     </div>
+
+                                  </div>
+
+                              </div>
+                              <div style="width: 15%;height: 480px; "><div class="one" style="font-size: 30px;margin-top: 40px;height: 430px;">绍兴府吴世家谱第叁拾肆世</div> </div>
+                         </div>
+                    </div>
+                    {% endverbatim %}
+            {% endfor %}
+        </div>
+	</div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+<script type="text/javascript">
+    var scount = 0 ;
+    var app = new Vue({
+       el:'#home',
+        data:{
+           list:[],
+            list1:[]
+        },
+        methods:{
+           look:function (i) {
+               $("#look").html($('#'+i).text());
+               $("#look").css('display','block');
+           }
+        }
+    });
+function loadApp() {
+	// Create the flipbook
+	$('.flipbook').turn({
+			// Width
+
+			width:922,
+
+			// Height
+
+			height:600,
+
+			// Elevation
+
+			elevation: 50,
+
+			// Enable gradients
+
+			gradients: true,
+
+			// Auto center this flipbook
+
+			autoCenter: true
+	});
+}
+// Load the HTML4 version if there's not CSS transform
+yepnope({
+	test : Modernizr.csstransforms,
+	yep: ['/static/js/turn.js'],
+	nope: ['/static/js/turn.html4.min.js'],
+	both: ['/static/css/basic.css'],
+	complete: loadApp
+});
+
+
+ window.onload = function () {
+
+  ttt()
+
+ };
+function ttt() {
+    var max = 0;
+    var pageCpunt = scount - 1 ;
+         $('.page-wrapper').each(function(index,element){
+              if($(element).css('z-index')>max)
+                  max = $(element).css('z-index');
+                });
+     $('.page-wrapper').each(function(index,element){
+         if($(element).css('z-index')==max)
+             scount = $(element).attr('page')
+     });
+    $.ajax({
+        url:'/home/index',
+        type:'POST',
+        data:{page:pageCpunt},
+        success:function (res) {
+            app.list = [];
+           console.log(JSON.parse(res)[0]['fields']);
+            var li = JSON.parse(res);
+            for(var i =0 ; i < li.length ; i++){
+                app.list.push(li[i]['fields']);
+
+            }
+        }
+    })
+}
+
+setInterval(function () {
+    ttw();
+    ttt()
+},200);
+
+function ttw() {
+        $.ajax({
+        url:'/home/get_right',
+        type:'POST',
+        data:{page:scount},
+        success:function (res) {
+            app.list1 = [];
+           console.log(JSON.parse(res)[0]['fields']);
+            var li = JSON.parse(res);
+            for(var i =0 ; i < li.length ; i++){
+                app.list1.push(li[i]['fields']);
+            }
+        }
+    })
+    }
+
+function hid() {
+    $('#look').css('display','none')
+}
+</script>
+</body>
+</html>
