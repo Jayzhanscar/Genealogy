@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 # Create your views here.
-from main.models import User, Admin
+from main.models import User, Admin, Jiaxun, IMG
 import json
 from django.core import serializers
 from hashlib import sha1
@@ -30,16 +30,85 @@ def index(request):
 
 
 @csrf_exempt
+def get_num(request):
+    a = 'bucuo'
+    users = User.objects.all()
+    set_list1 = list()
+    set_list2 = list()
+    set_list3 = list()
+    set_list4 = list()
+    set_list5 = list()
+    set_list6 = list()
+    for i in users:
+        # if i.id % 6 == 0 :
+        #     set_list6.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
+        #                       'shi': i.generation, 'line': i.line})
+        #
+        # elif i.id % 5 ==0:
+        #     set_list5.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
+        #                       'shi': i.generation, 'line': i.line})
+        # elif i.id % 4 == 0:
+        #     set_list4.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
+        #                       'shi': i.generation, 'line': i.line})
+        if i.id % 3 == 0:
+            set_list3.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
+                              'shi': i.generation, 'line': i.line})
+        elif i.id % 2 == 0:
+            set_list2.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
+                              'shi': i.generation, 'line': i.line})
+        else:
+            set_list1.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
+                              'shi': i.generation, 'line': i.line})
+    back_list = []
+    for i in range(int(len(users)/6)):
+        if i <= len(set_list2):
+            bool = True
+            if i % 2 == 0:
+                bool = False
+            # print(set_list1[i],set_list2[i], set_list3[i], set_list4[i], set_list5[i], set_list6[i])
+            back_list.append({'data': [set_list1[i], set_list2[i], set_list3[i]], 'show': bool})
+    jiaxuns = Jiaxun.objects.all()
+    imgs = IMG.objects.all()
+    return render(request, 'test1.html', locals())
+
+
+@csrf_exempt
+def new_page(request):
+    if request.method == 'POST':
+        raise 'sorry'
+    objs = User.objects.all()
+    user_list = list()
+    re_list = []
+
+    for i in objs:
+        user_list.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
+                              'shi': i.generation, 'line': i.line, 'line_str': i.line_str, 'girl': i.girl_num, 'son': i.son_num,
+                          'house': i.house})
+    for i in range(len(user_list)-1):
+        fool = False
+
+        if i >= 0 and str(user_list[i]['father']) == str(user_list[i-1]['father']):
+            print('ok')
+            fool = True
+        re_list.append({'id': user_list[i]['id'], 'name': user_list[i]['name'], 'father': user_list[i]['father'], 'sex': user_list[i]['sex'], 'content': user_list[i]['content'],
+                              'shi': user_list[i]['shi'], 'line': user_list[i]['line'], 'line_str': user_list[i]['line_str'], 'girl': user_list[i]['girl'], 'son': user_list[i]['son'],
+                          'house': user_list[i]['house'], 'fool': fool})
+
+    for j in re_list:
+        print(j)
+
+    return render(request, 'new.html', locals())
+
+
+@csrf_exempt
 def get_right(request):
     if request.method == 'POST':
         page_sum = request.POST.get('page')
         if page_sum and int(page_sum) >= 0:
             i1 = (int(page_sum) - 2) * 3
             i2 = i1 + 3
-            print('111111', i1, i2)
             ac = User.objects.all()[i1:i2]
             data = serializers.serialize("json", ac)
-            print(data)
             return HttpResponse(data)
         else:
             return HttpResponse('no')
@@ -168,6 +237,7 @@ def search(request):
     if request.method == "POST":
         son = request.POST.get('son')
         father = request.POST.get('father')
+        print(son, father)
         name_list = []
         if son:
             if father:

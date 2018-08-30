@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+         @font-face
+        {
+            font-family: myFirstFont;
+             src: url(/static/font/qf.ttf);
+        }
+        div
+        {
+         font-family:myFirstFont;
+        }
+        .main{
+
+            width: 50%;
+            margin-left:25%;
+            display: flex;
+            margin-top: 150px;
+            width: auto;
+
+        }
+        .main_page{
+            height: 300px;
+            border:1px solid firebrick;
+            width: auto;
+            writing-mode: vertical-rl;
+            writing-mode: tb-rl;
+        }
+        .top{
+            height: 70px;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid seagreen;
+        }
+        .body{
+            height: 230px;
+            border: 1px solid cornflowerblue;
+            display: flex;
+        }
+        .left{
+
+        }
+        .right{
+
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    {% for i in re_list %}
+     <div style="margin-left:0;">
+        <div style="height:60px;font-size: 32px; border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black{% if i.fool == True %}border-top: 1px solid black;{% endif %}">{{ i.father }}</div>
+        <div style="display: flex">
+            <div style="height:380px;display: flex;flex-direction: column;border-left: 1px solid black;border-bottom: 1px solid black">
+                <div style="height: 40px;font-size: 20px;writing-mode: vertical-rl; writing-mode: tb-rl;">{{ i.name }}</div>
+                <div style="writing-mode:vertical-rl; writing-mode: tb-rl; width: auto;margin-top: 30px; width:auto; display:inline-block !important; display:inline;display:table;">{{ i.content }}</div>
+            </div>
+            <div style="border-bottom: 1px solid black;  border-left: 1px solid black">
+                <div>子{{ i.son }} </div>
+                <idv> 行字辈{{ i.line_str }}</idv>
+                <div>行 {{ i.line }}</div>
+            </div>
+        </div>
+     </div>
+    {% endfor %}
+
+</div>
+</body>
+</html>

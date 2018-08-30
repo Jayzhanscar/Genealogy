@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^relogin$', views.relogin),
     url(r'^submit$', views.submit),
     url(r'^get_right$', views.get_right),
-    url(r'^search$', views.search)
+    url(r'^search$', views.search),
+    url(r'^test$', views.get_num),
+    url(r'^new$', views.new_page)
 
 ]
