@@ -15,11 +15,12 @@
         }
         .main{
 
-            width: 50%;
+
             margin-left:25%;
             display: flex;
             margin-top: 150px;
-            width: auto;
+            width: 100%;
+
 
         }
         .main_page{
@@ -48,11 +49,14 @@
         }
     </style>
 </head>
-<body>
-<div class="main">
+<body >
+<div style="position:absolute;width: 70%;height: 500px;top:100px;border: 1px solid royalblue;margin-left: 25%;z-index: 99;display: block">
+<div class="main" id="view">
+
     {% for i in re_list %}
      <div style="margin-left:0;">
-        <div style="height:60px;font-size: 32px; border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black{% if i.fool == True %}border-top: 1px solid black;{% endif %}">{{ i.father }}</div>
+        <div style="height:60px;font-size: 32px; border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black {% if i.fool == True %}border-top: 1px solid black;{% endif %}">
+            {% if i.fool != True %} {{ i.father }} {% endif %} </div>
         <div style="display: flex">
             <div style="height:380px;display: flex;flex-direction: column;border-left: 1px solid black;border-bottom: 1px solid black">
                 <div style="height: 40px;font-size: 20px;writing-mode: vertical-rl; writing-mode: tb-rl;">{{ i.name }}</div>
@@ -66,7 +70,15 @@
         </div>
      </div>
     {% endfor %}
-
 </div>
+</div>
+
 </body>
+<script>
+    var o = document.getElementById("view");
+    var h = o.offsetHeight; //高度
+    var w = o.offsetWidth; //宽度
+    console.log(w, '---', o.scrollWidth)
+
+</script>
 </html>
