@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>打印模式</title>
     <style>
          @font-face
         {
@@ -14,14 +14,12 @@
          font-family:myFirstFont;
         }
         .main{
-
-
-            margin-left:25%;
+{#            margin-left:5%;#}
             display: flex;
-            margin-top: 150px;
-            width: 100%;
-
-
+            float: right;
+            width: 98%;
+            position: absolute;
+            overflow: hidden;
         }
         .main_page{
             height: 300px;
@@ -47,38 +45,143 @@
         .right{
 
         }
+        .wushi{
+            height: 443px;
+            width: 5%;
+            position: absolute;
+            border:1px solid black;
+            writing-mode:lr-tb;
+            font-size: 30px;
+        }
+        .uppage:hover{
+            cursor: pointer;
+        }
+        .downpage{
+            cursor: pointer;
+        }
+        .drump{
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body >
-<div style="position:absolute;width: 70%;height: 500px;top:100px;border: 1px solid royalblue;margin-left: 25%;z-index: 99;display: block">
-<div class="main" id="view">
-
-    {% for i in re_list %}
-     <div style="margin-left:0;">
-        <div style="height:60px;font-size: 32px; border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black {% if i.fool == True %}border-top: 1px solid black;{% endif %}">
-            {% if i.fool != True %} {{ i.father }} {% endif %} </div>
-        <div style="display: flex">
-            <div style="height:380px;display: flex;flex-direction: column;border-left: 1px solid black;border-bottom: 1px solid black">
-                <div style="height: 40px;font-size: 20px;writing-mode: vertical-rl; writing-mode: tb-rl;">{{ i.name }}</div>
-                <div style="writing-mode:vertical-rl; writing-mode: tb-rl; width: auto;margin-top: 30px; width:auto; display:inline-block !important; display:inline;display:table;">{{ i.content }}</div>
-            </div>
-            <div style="border-bottom: 1px solid black;  border-left: 1px solid black">
-                <div>子{{ i.son }} </div>
-                <idv> 行字辈{{ i.line_str }}</idv>
-                <div>行 {{ i.line }}</div>
-            </div>
-        </div>
-     </div>
-    {% endfor %}
+<div style=" margin-top: 40px;margin-left: 25%;font-family: 'Al Bayan';display: flex">
+    <div  class="uppage" onclick="up()">上一页</div>
+    <input style="margin-left: 10px;" id="ontopage" placeholder="跳转到"/>
+    <div> 页</div>
+    <div class="drump" onclick="onto()" style="margin-left: 12px;">跳转</div>
+    <div  class='downpage' onclick="down()" style="margin-left: 12px">下一页</div>
+    <div id="ne" style="margin-left: 10%">当前为首页</div>
+    <div  style="margin-left: 20px;" id="all_page"></div>
+    <div style="margin-left: 25px;">打印模式</div>
 </div>
+    <div id='kuang' style="position:absolute;width: 60%;height: 443px;top:100px; margin-left: 20%;box-shadow: 0 0 10px gray;padding: 10px 10px 10px 10px;
+    overflow: hidden;display: flex">
+         <div class="main" id="view">
+            {% for i in re_list %}
+             <div style="margin-left:0;" id="begin">
+                <div style="height:60px;font-size: 32px; border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black {% if i.fool == True %}border-top: 1px solid black;{% endif %}">
+                    {% if i.fool != True %} {{ i.father }} {% endif %} </div>
+                <div style="display: flex">
+                    <div style="height:380px;display: flex;flex-direction: column;border-left: 1px solid black;border-bottom: 1px solid black">
+                        <div style="height: 40px;font-size: 20px;writing-mode: vertical-rl; writing-mode: tb-rl;">{{ i.name }}</div>
+                        <div style="writing-mode:vertical-rl; writing-mode: tb-rl; width: auto;margin-top: 30px; width:auto; display:inline-block !important;
+                        display:inline;display:table;">{{ i.content }}</div>
+                    </div>
+                    <div style="border-bottom: 1px solid black;  border-left: 1px solid black;width: 45px;">
+                        <div>子{{ i.son }} </div>
+                        <div> 行辈{{ i.line_str }}</div>
+                        <div>行 {{ i.line }}</div>
+                    </div>
+                </div>
+             </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
 </body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script>
     var o = document.getElementById("view");
-    var h = o.offsetHeight; //高度
-    var w = o.offsetWidth; //宽度
-    console.log(w, '---', o.scrollWidth)
+        var h = o.offsetHeight; //高度
+        var w = o.scrollWidth; //宽度
+        var u = document.getElementById('kuang');
+        var z = u.offsetWidth;
+        var page_all = parseInt(w) / parseInt(z)  ;
+       // 总共有几页
+        $('#all_page').text('总共有'+ parseInt(page_all) + '页');
 
+
+    function look() {
+        var o = document.getElementById("view");
+        var h = o.offsetHeight; //高度
+        var w = o.scrollWidth; //宽度
+        var u = document.getElementById('kuang');
+        var z = u.offsetWidth;
+        var page = parseInt(w) / parseInt(z)  ;
+        console.log(parseInt(w),parseInt(z),parseInt(page),z)
+
+    }
+    function up() {
+        // 获取当前页计算上一页的左移宽度
+         // 获取当前页计算下一页的左移宽度
+        var o = document.getElementById("begin");
+        var i = document.getElementById("view");
+
+        var w = i.scrollWidth; //w宽度
+
+        var s=window.getComputedStyle(o).marginLeft;
+        //改变值
+        var uu =  s+"-50px";
+        var n = parseInt(s) / i.offsetWidth + 1; // 当前页
+        $('#ne').text('当前为'+ -n +"页");
+
+        console.log(-n ,  parseInt(s), '宽度', typeof s, uu);
+        if(-n > 0){
+            o.style.marginLeft =  String(parseInt(s) + parseInt(i.offsetWidth)) +'px';
+        }
+        else {
+            alert('当前为首页')
+        }
+    }
+    function down() {
+        // 获取当前页计算下一页的左移宽度
+        var o = document.getElementById("begin");
+        var i = document.getElementById("view");
+
+        var w = i.scrollWidth; //w宽度
+
+        var s=window.getComputedStyle(o).marginLeft;
+        //改变值
+        var uu =  s+"-50px";
+        var n = -parseInt(s) / i.offsetWidth + 1; // 当前页
+
+        $('#ne').text('当前为'+ n +"页");
+        console.log(n,  parseInt(s), '宽度', typeof s, uu);
+        o.style.marginLeft =  String(parseInt(s) - parseInt(i.offsetWidth)) +'px'
+    }
+    function onto() {
+        var page = $('#ontopage').val();
+        if(page > page_all){
+            alert('超过最大页，请重新输入')
+        }
+      //  else if( typeof page != 'number') {
+        //    alert('类型错误')
+        //}
+        else{
+            console.log('page:', page);
+            var o = document.getElementById("begin");
+            console.log('跳转到'+ page + '页');
+            // 获取每一页的宽度
+            var every_page = document.getElementById("view");
+            var every_width = every_page.offsetWidth;
+            var move_width = every_width * parseInt(page);
+            $('#ne').text('当前为'+ page +"页");
+        console.log('move', move_width);
+        o.style.marginLeft =  -move_width + 'px'
+        }
+    }
 </script>
 </html>

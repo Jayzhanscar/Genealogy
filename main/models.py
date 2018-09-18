@@ -3,29 +3,29 @@ import datetime
 # Create your models here.
 
 
-Sex_choices = ( ('男','男'), ('女','女'))
+Sex_choices = (("男", '男'), ('女', '女'))
 Shi_choices = (
-    ('壹','壹'),
-    ('贰','贰'),
-    ('叁','叁'),
-    ('肆','肆'),
-    ('伍','伍'),
-    ('陆','陆'),
-    ('柒','柒'),
-    ('捌','捌'),
-    ('玖','玖'),
-    ('拾','拾'),
-    ('拾壹','拾壹'),
-('拾贰','拾贰'),
-('拾叁','拾叁'),
-('拾肆','拾肆'),
-('拾伍','拾伍'),
-('拾陆','拾陆'),
-('拾柒','拾柒'),
-('拾捌','拾捌'),
-('拾玖','拾玖'),
-('贰拾','贰拾'),
-            ('贰壹','贰壹'),
+    ('壹', '壹'),
+    ('贰', '贰'),
+    ('叁', '叁'),
+    ('肆', '肆'),
+    ('伍', '伍'),
+    ('陆', '陆'),
+    ('柒', '柒'),
+    ('捌', '捌'),
+    ('玖', '玖'),
+    ('拾', '拾'),
+    ('拾壹', '拾壹'),
+('拾贰', '拾贰'),
+('拾叁', '拾叁'),
+('拾肆', '拾肆'),
+('拾伍', '拾伍'),
+('拾陆', '拾陆'),
+('拾柒', '拾柒'),
+('拾捌', '拾捌'),
+('拾玖', '拾玖'),
+('贰拾', '贰拾'),
+            ('贰壹', '贰壹'),
     ('贰拾贰', '贰拾贰'),
     ('贰拾叁', '贰拾叁'),
     ('贰拾肆', '贰拾肆'),
@@ -37,26 +37,26 @@ Shi_choices = (
     ('叁拾', '叁拾')
 )
 Hang_choices = (
-    ('壹','壹'),
-    ('贰','贰'),
-    ('叁','叁'),
-    ('肆','肆'),
-    ('伍','伍'),
-    ('陆','陆'),
-    ('柒','柒'),
-    ('捌','捌'),
-    ('玖','玖'),
-    ('拾','拾'),
-    ('拾壹','拾壹'),
-('拾贰','拾贰'),
-('拾叁','拾叁'),
-('拾肆','拾肆'),
-('拾伍','拾伍'),
-('拾陆','拾陆'),
-('拾柒','拾柒'),
-('拾捌','拾捌'),
-('拾玖','拾玖'),
-('贰拾','贰拾')
+    ('壹', '壹'),
+    ('贰', '贰'),
+    ('叁', '叁'),
+    ('肆', '肆'),
+    ('伍', '伍'),
+    ('陆', '陆'),
+    ('柒', '柒'),
+    ('捌', '捌'),
+    ('玖', '玖'),
+    ('拾', '拾'),
+    ('拾壹', '拾壹'),
+('拾贰', '拾贰'),
+('拾叁', '拾叁'),
+('拾肆', '拾肆'),
+('拾伍', '拾伍'),
+('拾陆', '拾陆'),
+('拾柒', '拾柒'),
+('拾捌', '拾捌'),
+('拾玖', '拾玖'),
+('贰拾', '贰拾')
 )
 
 
@@ -104,7 +104,7 @@ class Admin(models.Model):
     """
     管理员账号管理
     """
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     # 用户名
     name = models.CharField(max_length=100)
     # 密码
@@ -119,7 +119,7 @@ class Jiaxun(models.Model):
     """
     家训管理表
     """
-    id = models.IntegerField(primary_key=True, verbose_name='唯一标识')
+    id = models.AutoField(primary_key=True, verbose_name='唯一标识')
     # 章节数
     chapter = models.CharField(verbose_name='章节', max_length=30)
     # 具体内容
@@ -150,12 +150,32 @@ class MiContent(models.Model):
     """
     修谱记叙章节
     """
-    id = models.CharField(primary_key=True, max_length=30)
+    id = models.AutoField(primary_key=True, max_length=30)
     # 章节
     chapter = models.CharField(max_length=10)
     # 具体内容
     content = models.TextField(null=True)
     # 创建时间
-    create_time = models.DateTimeField(default=datetime.datetime.utcnow, db_column='chapter_create_date', verbose_name='创建时间')
+    create_time = models.DateTimeField(default=datetime.datetime.utcnow, db_column='chapter_create_date',
+                                       verbose_name='创建时间')
+
+    class Meta:
+
+        verbose_name_plural = '修谱记叙章节'
 
 
+class Lineage(models.Model):
+    """
+    世系分行字图
+    """
+    id = models.AutoField(primary_key=True, max_length=30)
+    # 图片文件
+    img = models.ImageField(upload_to='img', verbose_name='图片文件(不超过3')
+    # 文字描述
+    content = models.TextField()
+    # 创建时间
+    create_time = models.DateTimeField(default=datetime.datetime.utcnow, db_column='chapter_create_date',
+                                       verbose_name='创建时间')
+
+    class Meta:
+        verbose_name_plural = '世系分行字图'

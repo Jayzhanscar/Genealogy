@@ -33,23 +33,14 @@ def index(request):
 def get_num(request):
     a = 'bucuo'
     users = User.objects.all()
-    set_list1 = list()
-    set_list2 = list()
-    set_list3 = list()
-    set_list4 = list()
-    set_list5 = list()
-    set_list6 = list()
+    set_list1 = []
+    set_list2 = []
+    set_list3 = []
+    set_list4 = []
+    set_list5 = []
+    set_list6 = []
     for i in users:
-        # if i.id % 6 == 0 :
-        #     set_list6.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
-        #                       'shi': i.generation, 'line': i.line})
-        #
-        # elif i.id % 5 ==0:
-        #     set_list5.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
-        #                       'shi': i.generation, 'line': i.line})
-        # elif i.id % 4 == 0:
-        #     set_list4.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
-        #                       'shi': i.generation, 'line': i.line})
+        father_Detail = User.objects.filter(father_id=i.father_id)[0]
         if i.id % 3 == 0:
             set_list3.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
                               'shi': i.generation, 'line': i.line})
@@ -81,22 +72,25 @@ def new_page(request):
     re_list = []
 
     for i in objs:
+        father_detail = User.objects.filter(father_id=i.father_id)[0]
         user_list.append({'id': i.id, 'name': i.name, 'father': i.father_id, 'sex': i.sex, 'content': i.content,
                               'shi': i.generation, 'line': i.line, 'line_str': i.line_str, 'girl': i.girl_num, 'son': i.son_num,
-                          'house': i.house})
+                          'house': i.house, 'father_son': father_detail.son_num, 'father_girl': father_detail.girl_num,
+                          'father_house': father_detail.house})
     for i in range(len(user_list)-1):
         fool = False
 
         if i >= 0 and str(user_list[i]['father']) == str(user_list[i-1]['father']):
-            print('ok')
             fool = True
-        re_list.append({'id': user_list[i]['id'], 'name': user_list[i]['name'], 'father': user_list[i]['father'], 'sex': user_list[i]['sex'], 'content': user_list[i]['content'],
-                              'shi': user_list[i]['shi'], 'line': user_list[i]['line'], 'line_str': user_list[i]['line_str'], 'girl': user_list[i]['girl'], 'son': user_list[i]['son'],
-                          'house': user_list[i]['house'], 'fool': fool})
+        re_list.append({'id': user_list[i]['id'], 'name': user_list[i]['name'], 'father': user_list[i]['father'], 'sex':
+            user_list[i]['sex'], 'content': user_list[i]['content'],
+                              'shi': user_list[i]['shi'], 'line': user_list[i]['line'], 'line_str': user_list[i]['line_str'],
+                        'girl': user_list[i]['girl'], 'son': user_list[i]['son'],
+                          'house': user_list[i]['house'], 'fool': fool, 'father_son': user_list[i]['father_son'], 'father_girl': user_list[i]['father_girl'],
+                          'father_house': user_list[i]['father_house']})
 
-    for j in re_list:
-        print(j)
-
+    # for i in re_list:
+    #     print(i)
     return render(request, 'new.html', locals())
 
 
@@ -181,12 +175,10 @@ def relogin(request):
     if request.method == 'POST':
         username = request.POST.get('name')
         userpwd = request.POST.get('pwd')
-        print('1', username, userpwd)
         try:
             users_name = Admin.objects.filter(name=username)
         except Exception as e:
             print(e)
-        print(users_name)
         if users_name:
             s1 = sha1()
             s1.update(userpwd.encode("utf8"))

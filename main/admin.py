@@ -1,9 +1,6 @@
 from django.contrib import admin
-from main.models import User, Admin, Jiaxun , IMG
+from main.models import User, Admin, Jiaxun, IMG, Lineage, MiContent
 # Register your models here.
-
-
-
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -28,7 +25,11 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ('name', 'father_id', 'generation', 'line')  # 搜索字段
     # date_hierarchy = 'create_date'  # 详细时间分层筛选　
 
+
 class JiaxunAdmin(admin.ModelAdmin):
+    """
+    家谱
+    """
     list_display = ('id', 'chapter', 'content', 'create_time')
     list_display_links = ('id', 'chapter', 'create_time')
 
@@ -42,9 +43,31 @@ class IMGAdmin(admin.ModelAdmin):
     list_display_links = ('name', 'img')
 
 
-admin.site.register(Admin),
+class MiContentAdmin(admin.ModelAdmin):
+    """
+    修谱记叙章节
+    """
+    list_display = ('id', 'chapter', 'content', 'create_time')
+
+    list_per_page = 10
+
+    list_display_links = ('id', 'chapter')
+
+
+class LineageAdmin(admin.ModelAdmin):
+    """
+    世系分行字图
+    """
+    list_display = ('id', 'img', 'content', 'create_time')
+
+    list_per_page = 20
+
+    list_display_links = ('id', 'img', 'content', 'create_time')
+
 admin.site.register(User, UserAdmin),
+admin.site.register(MiContent, MiContentAdmin)
+admin.site.register(Lineage, LineageAdmin)
 admin.site.register(Jiaxun, JiaxunAdmin),
 admin.site.register(IMG, IMGAdmin),
-admin.site.site_header = '吴氏家族后台管理系统'
+admin.site.site_header = '吴氏家族'
 admin.site.site_title = '后台管理'
