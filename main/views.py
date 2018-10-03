@@ -80,13 +80,14 @@ def new_page(request):
     for i in range(len(user_list)-1):
         fool = False
 
-        if i >= 0 and str(user_list[i]['father']) == str(user_list[i-1]['father']):
+        if i >= 0 and str(user_list[i]['father']) == str(user_list[i+1]['father']):
             fool = True
         re_list.append({'id': user_list[i]['id'], 'name': user_list[i]['name'], 'father': user_list[i]['father'], 'sex':
-            user_list[i]['sex'], 'content': user_list[i]['content'],
+            user_list[i]['sex'], 'content': '儿' + str(user_list[i]['son']) + " "+"女" + str(user_list[i]['girl'])+" " + user_list[i]['content'],
                               'shi': user_list[i]['shi'], 'line': user_list[i]['line'], 'line_str': user_list[i]['line_str'],
                         'girl': user_list[i]['girl'], 'son': user_list[i]['son'],
-                          'house': user_list[i]['house'], 'fool': fool, 'father_son': user_list[i]['father_son'], 'father_girl': user_list[i]['father_girl'],
+                          'house': user_list[i]['house'], 'fool': fool, 'father_son': user_list[i]['father_son'],
+                        'father_girl': user_list[i]['father_girl'],
                           'father_house': user_list[i]['father_house']})
 
     # for i in re_list:

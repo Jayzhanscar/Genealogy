@@ -73,7 +73,7 @@ class User(models.Model):
     # 用户名
     name = models.CharField(max_length=30, verbose_name='姓名')
     # father_id
-    father_id = models.CharField(max_length=30, verbose_name='父亲名')
+    father_id = models.CharField(max_length=30, verbose_name='父名')
     # 世
     generation = models.CharField(max_length=10, verbose_name='世', choices=Shi_choices)
     # 行
@@ -83,13 +83,13 @@ class User(models.Model):
     # 行字辈
     line_str = models.CharField(max_length=30, verbose_name='行字辈', null=True)
     # son 个数
-    son_num = models.CharField(max_length=10, verbose_name="子数量", choices=Hang_choices, null=True)
+    son_num = models.CharField(max_length=10, verbose_name="儿子个数", choices=Hang_choices, null=True)
     # girl num
     girl_num = models.CharField(max_length=10, verbose_name='女儿个数', choices=Hang_choices, null=True)
     # 房
     house = models.CharField(max_length=10, verbose_name='房', choices=Hang_choices, null=True)
     # 描述
-    content = models.TextField( verbose_name='简历')
+    content = models.TextField(verbose_name='简介')
     # 创建时间
     device_create_date = models.DateTimeField(default=datetime.datetime.utcnow, db_column='user_create_date', verbose_name='创建时间')
 
@@ -143,7 +143,7 @@ class IMG(models.Model):
 
     class Meta:
 
-        verbose_name_plural = '祠堂圣旨图片文件'
+        verbose_name_plural = '谱例'
 
 
 class MiContent(models.Model):

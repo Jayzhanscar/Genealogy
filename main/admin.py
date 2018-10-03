@@ -10,7 +10,7 @@ class UserAdmin(admin.ModelAdmin):
     list_per_page = 50
 
     # ordering设置默认排序字段，负号表示降序排序
-    ordering = ('device_create_date',)
+    ordering = ('id',)
 
     # fk_fields 设置显示外键字段
     # fk_fields = ('user',)
