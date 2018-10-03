@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'Genealogy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': '107.175.49.137',
         'PORT': '3306',
         'USER': 'root',
-        'PASSWORD': 'zlj941020',
+        'PASSWORD': 'qazwsx123',
         'NAME': 'jiapu',
     }
 }
